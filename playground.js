@@ -8,10 +8,14 @@ const Ship = (shipLength, sunk = false) => {
     console.log(numHits);
     sunk = isSunk();
   };
-  return { shipLength, numHits, sunk, hit };
+  const showHits = () => {
+    return numHits;
+  };
+  return { shipLength, hit, sunk, showHits };
 };
 
 const testShip = Ship(5);
 testShip.hit();
-console.log(testShip.numHits);
+console.log(testShip.showHits());
 testShip.hit();
+console.log(testShip.showHits());

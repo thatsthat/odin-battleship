@@ -7,7 +7,10 @@ const Ship = (shipLength, numHits = 0, sunk = false) => {
     numHits += 1;
     sunk = isSunk();
   };
-  return { shipLength, numHits, sunk, hit };
+  const showHits = () => {
+    return numHits;
+  };
+  return { shipLength, showHits, sunk, hit };
 };
 
 //const taskList = (() => {})();
