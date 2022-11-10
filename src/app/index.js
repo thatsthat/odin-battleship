@@ -18,8 +18,10 @@ const Gameboard = () => {
   // 5-Patrol Boat
   const shipSizes = [5, 4, 3, 3, 2];
   // Create a 10 x 10 board
-  const board = new Array(10);
-  board.fill(new Array(10));
+  let board = new Array(10);
+  for (let i = 0; i < board.length; i++) {
+    board[i] = new Array(10);
+  }
   // Create an array to store all ships on the board
   const ships = [];
   const placeShip = (shipType, startCoords, orientation) => {
@@ -62,5 +64,4 @@ const Gameboard = () => {
   };
   return { getBoard, placeShip };
 };
-
 export { Ship, Gameboard };

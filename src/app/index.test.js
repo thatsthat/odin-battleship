@@ -22,14 +22,17 @@ test("Create an empty Gameboard", () => {
 });
 
 test("Place a Carrier ship on the board", () => {
-  const eB = new Array(10);
-  eB.fill(new Array(10));
-  eB[0][0] = 1;
+  let eB = new Array(10);
+  for (let i = 0; i < eB.length; i++) {
+    eB[i] = new Array(10);
+  }
+  //eB[0][0] = 1;
   for (let i = 0; i < 5; i++) {
-    //eB[0][i] = 1;
+    eB[0][i] = 1;
   }
   console.log(eB);
   const testBoard = tF.Gameboard();
+  console.log(testBoard.getBoard());
   testBoard.placeShip(1, [0, 0], "v");
-  expect(testBoard.getBoard()).toEqual(eB);
+  expect(testBoard.getBoard()).toBe(eB);
 });
