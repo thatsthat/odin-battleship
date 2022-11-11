@@ -60,7 +60,7 @@ const Gameboard = () => {
   const getBoard = () => {
     return board;
   };
-  const receiveAttach = (attackCoords) => {
+  const receiveAttack = (attackCoords) => {
     const attackVal = board[attackCoords[1]][attackCoords[0]];
     if (typeof attackVal == "undefined") return "The attack missed all ships!";
     else {
@@ -71,6 +71,6 @@ const Gameboard = () => {
     }
   };
 
-  return { getBoard, placeShip, receiveAttach };
+  return { getBoard, placeShip, receiveAttack };
 };
 export { Ship, Gameboard };
