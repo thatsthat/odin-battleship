@@ -29,9 +29,7 @@ const Gameboard = () => {
       throw "Invalid ship type";
     }
     const shipSize = shipSizes[shipType - 1];
-    const outsideBoard = (v) => {
-      v < 0 || v >= 10;
-    };
+    const outsideBoard = (v) => v < 0 || v >= 10;
     if (startCoords.some(outsideBoard)) {
       throw "Invalid start coordinates";
     }
@@ -41,7 +39,7 @@ const Gameboard = () => {
       if (endCoords.some(outsideBoard)) {
         throw "The ship must be place within the board limits";
       } else {
-        ships.push(new Ship(shipSizes[shipType]));
+        ships.push(new Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
           board[startCoords[1]][startCoords[0] + i] = ships.length;
         }
@@ -52,7 +50,7 @@ const Gameboard = () => {
       if (endCoords.some(outsideBoard)) {
         throw "The ship must be place within the board limits";
       } else {
-        ships.push(new Ship(shipSizes[shipType]));
+        ships.push(new Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
           board[startCoords[1] + i][startCoords[0]] = ships.length;
         }

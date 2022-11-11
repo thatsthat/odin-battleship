@@ -1,6 +1,4 @@
 {
   "cSpell.enabled": true,
-  "cSpell.enableFiletypes": [
-    "!json"
-  ]
+  "cSpell.enableFiletypes": ["!javascript", "!json"]
 }

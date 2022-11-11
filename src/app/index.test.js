@@ -26,13 +26,21 @@ test("Place a Carrier ship on the board", () => {
   for (let i = 0; i < eB.length; i++) {
     eB[i] = new Array(10);
   }
-  //eB[0][0] = 1;
   for (let i = 0; i < 5; i++) {
-    eB[0][i] = 1;
+    eB[i][0] = 1;
   }
   console.log(eB);
   const testBoard = tF.Gameboard();
   console.log(testBoard.getBoard());
   testBoard.placeShip(1, [0, 0], "v");
-  expect(testBoard.getBoard()).toBe(eB);
+  expect(testBoard.getBoard()).toEqual(eB);
+});
+test("Place a Carrier ship with wrong coordinates", () => {
+  const testBoard = tF.Gameboard();
+  function launchBoard() {
+    testBoard.placeShip(1, [9, 9], "v");
+  }
+  expect(launchBoard).toThrow(
+    /^The ship must be place within the board limits$/
+  );
 });
