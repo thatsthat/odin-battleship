@@ -60,6 +60,17 @@ const Gameboard = () => {
   const getBoard = () => {
     return board;
   };
-  return { getBoard, placeShip };
+  const receiveAttach = (attackCoords) => {
+    const attackVal = board[attackCoords[1]][attackCoords[0]];
+    if (typeof attackVal == "undefined") return "The attack missed all ships!";
+    else {
+      const hitShip = ships[attackVal - 1];
+      hitShip.hit();
+      if (hitShip.sunk) return "The attack has hit and sunk a ship!";
+      else return "The attack has hit a ship!";
+    }
+  };
+
+  return { getBoard, placeShip, receiveAttach };
 };
 export { Ship, Gameboard };
