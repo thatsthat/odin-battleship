@@ -32,12 +32,36 @@ test("Place a Carrier ship on the board", () => {
   testBoard.placeShip(1, [0, 0], "v");
   expect(testBoard.getBoard()).toEqual(eB);
 });
+
 test("Place a Carrier ship with wrong coordinates", () => {
   const testBoard = tF.Gameboard();
   function launchBoard() {
     testBoard.placeShip(1, [9, 9], "v");
   }
   expect(launchBoard).toThrow(
-    /^The ship must be place within the board limits$/
+    /^The ship must be placed within the board limits$/
+  );
+});
+
+test("Hit a ship!", () => {
+  const testBoard = tF.Gameboard();
+  testBoard.placeShip(1, [0, 0], "v");
+  expect(testBoard.receiveAttack([0, 0])).toBe("The attack has hit a ship!");
+});
+
+test("Miss a ship", () => {
+  const testBoard = tF.Gameboard();
+  testBoard.placeShip(1, [0, 0], "v");
+  expect(testBoard.receiveAttack([1, 0])).toBe("The attack missed all ships!");
+});
+
+test("Sink a ship!", () => {
+  const testBoard = tF.Gameboard();
+  testBoard.placeShip(1, [0, 0], "v");
+  for (let i = 0; i < 4; i++) {
+    testBoard.receiveAttack([0, i]);
+  }
+  expect(testBoard.receiveAttack([0, 4])).toBe(
+    "The attack has hit and sunk a ship!"
   );
 });

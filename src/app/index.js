@@ -48,7 +48,7 @@ const Gameboard = () => {
       const endCoords = [startCoords[0], startCoords[1] + shipSize];
       // Check that the ship is placed within the board limits
       if (endCoords.some(outsideBoard)) {
-        throw "The ship must be place within the board limits";
+        throw "The ship must be placed within the board limits";
       } else {
         ships.push(new Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
