@@ -1,16 +1,16 @@
 // Task factory function
-const Ship = (shipLength, numHits = 0, sunk = false) => {
+const Ship = (shipLength) => {
+  let numHits = 0;
   const isSunk = () => {
     return numHits >= shipLength;
   };
   const hit = () => {
     numHits += 1;
-    sunk = isSunk();
   };
   const showHits = () => {
     return numHits;
   };
-  return { shipLength, showHits, sunk, hit };
+  return { shipLength, showHits, isSunk, hit };
 };
 
 const Gameboard = () => {
@@ -66,7 +66,8 @@ const Gameboard = () => {
     else {
       const hitShip = ships[attackVal - 1];
       hitShip.hit();
-      if (hitShip.sunk) return "The attack has hit and sunk a ship!";
+      //console.log(hitShip.showHits(), hitShip.isSunk());
+      if (hitShip.isSunk()) return "The attack has hit and sunk a ship!";
       else return "The attack has hit a ship!";
     }
   };

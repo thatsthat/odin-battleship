@@ -21,22 +21,22 @@ test("Create an empty Gameboard", () => {
 });
 
 test("Place a Carrier ship on the board", () => {
-  let eB = new Array(10);
-  for (let i = 0; i < eB.length; i++) {
-    eB[i] = new Array(10);
+  let eB2 = new Array(10);
+  for (let i = 0; i < eB2.length; i++) {
+    eB2[i] = new Array(10);
   }
   for (let i = 0; i < 5; i++) {
-    eB[i][0] = 1;
+    eB2[i][0] = 1;
   }
-  const testBoard = tF.Gameboard();
-  testBoard.placeShip(1, [0, 0], "v");
-  expect(testBoard.getBoard()).toEqual(eB);
+  const testBoard2 = tF.Gameboard();
+  testBoard2.placeShip(1, [0, 0], "v");
+  expect(testBoard2.getBoard()).toEqual(eB2);
 });
 
 test("Place a Carrier ship with wrong coordinates", () => {
-  const testBoard = tF.Gameboard();
+  const testBoard3 = tF.Gameboard();
   function launchBoard() {
-    testBoard.placeShip(1, [9, 9], "v");
+    testBoard3.placeShip(1, [9, 9], "v");
   }
   expect(launchBoard).toThrow(
     /^The ship must be placed within the board limits$/
@@ -44,24 +44,24 @@ test("Place a Carrier ship with wrong coordinates", () => {
 });
 
 test("Hit a ship!", () => {
-  const testBoard = tF.Gameboard();
-  testBoard.placeShip(1, [0, 0], "v");
-  expect(testBoard.receiveAttack([0, 0])).toBe("The attack has hit a ship!");
+  const testBoard4 = tF.Gameboard();
+  testBoard4.placeShip(1, [0, 0], "v");
+  expect(testBoard4.receiveAttack([0, 0])).toBe("The attack has hit a ship!");
 });
 
 test("Miss a ship", () => {
-  const testBoard = tF.Gameboard();
-  testBoard.placeShip(1, [0, 0], "v");
-  expect(testBoard.receiveAttack([1, 0])).toBe("The attack missed all ships!");
+  const testBoard5 = tF.Gameboard();
+  testBoard5.placeShip(1, [0, 0], "v");
+  expect(testBoard5.receiveAttack([1, 0])).toBe("The attack missed all ships!");
 });
 
 test("Sink a ship!", () => {
-  const testBoard = tF.Gameboard();
-  testBoard.placeShip(1, [0, 0], "v");
+  const testBoard6 = tF.Gameboard();
+  testBoard6.placeShip(1, [0, 0], "v");
   for (let i = 0; i < 4; i++) {
-    testBoard.receiveAttack([0, i]);
+    testBoard6.receiveAttack([0, i]);
   }
-  expect(testBoard.receiveAttack([0, 4])).toBe(
+  expect(testBoard6.receiveAttack([0, 4])).toBe(
     "The attack has hit and sunk a ship!"
   );
 });
