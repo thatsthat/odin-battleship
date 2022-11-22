@@ -84,4 +84,9 @@ const Gameboard = () => {
 
   return { getBoard, placeShip, receiveAttack, allSunk };
 };
-export { Ship, Gameboard };
+
+const Player = () => {
+  const board = new Gameboard();
+};
+
+export { Ship, Gameboard, Player };
