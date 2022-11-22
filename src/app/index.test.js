@@ -61,7 +61,9 @@ test("Sink a ship!", () => {
   for (let i = 0; i < 4; i++) {
     testBoard6.receiveAttack([0, i]);
   }
+  expect(testBoard6.allSunk()).toEqual(false);
   expect(testBoard6.receiveAttack([0, 4])).toBe(
     "The attack has hit and sunk a ship!"
   );
+  expect(testBoard6.allSunk()).toEqual(true);
 });
