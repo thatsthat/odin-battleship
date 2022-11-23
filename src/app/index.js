@@ -10,7 +10,7 @@ const Ship = (shipLength) => {
   const showHits = () => {
     return numHits;
   };
-  return { shipLength, showHits, isSunk, hit };
+  return { showHits, isSunk, hit };
 };
 
 const Gameboard = () => {
@@ -26,8 +26,7 @@ const Gameboard = () => {
     falses.fill(false);
     board_hits[i] = falses;
   }
-  //board_hits.fill(false);
-  // Create an array to store all ships on the board
+  // Create an array to store all ships objects on the board
   const ships = [];
   const placeShip = (shipType, startCoords, orientation) => {
     if (shipType < 1 || shipType > 5) {
@@ -66,6 +65,13 @@ const Gameboard = () => {
     return board_ships;
   };
   const receiveAttack = (attackCoords) => {
+    const outsideBoard = (v) => v < 0 || v >= 10;
+    if (attackCoords.some(outsideBoard)) {
+      throw "Invalid attack coordinates";
+    }
+    if (board_hits[attackCoords[1]][attackCoords[0]] === true) {
+      throw "You can't attack the same coordinates twice";
+    }
     board_hits[attackCoords[1]][attackCoords[0]] = true;
     const attackVal = board_ships[attackCoords[1]][attackCoords[0]];
     if (typeof attackVal == "undefined") return "The attack missed all ships!";
@@ -86,6 +92,8 @@ const Gameboard = () => {
 };
 
 const Player = () => {
+  // Players can attack other players board
+  // Players know which moves have already been made to avoid repeating
   const board = new Gameboard();
 };
 
