@@ -1,11 +1,6 @@
 //const { caesarCipher, analyzeArray } = require("./index.js");
 const tF = require("./index.js");
 
-test("Create a ship of a certain length", () => {
-  const testShip = tF.Ship(5);
-  expect(testShip.shipLength).toBe(5);
-});
-
 test("Hit a ship", () => {
   const testShip2 = tF.Ship(5);
   expect(testShip2.showHits()).toBe(0);
@@ -17,7 +12,7 @@ test("Create an empty Gameboard", () => {
   const eB = new Array(10);
   eB.fill(new Array(10));
   const testBoard = tF.Gameboard();
-  expect(testBoard.getBoard()).toEqual(eB);
+  expect(testBoard.getShipsMap()).toEqual(eB);
 });
 
 test("Place a Carrier ship on the board", () => {
@@ -30,7 +25,7 @@ test("Place a Carrier ship on the board", () => {
   }
   const testBoard2 = tF.Gameboard();
   testBoard2.placeShip(1, [0, 0], "v");
-  expect(testBoard2.getBoard()).toEqual(eB2);
+  expect(testBoard2.getShipsMap()).toEqual(eB2);
 });
 
 test("Place a Carrier ship with wrong coordinates", () => {
@@ -66,4 +61,16 @@ test("Sink a ship!", () => {
     "The attack has hit and sunk a ship!"
   );
   expect(testBoard6.allSunk()).toEqual(true);
+});
+
+test("Generate automatic attack", () => {
+  let hitsMap = new Array(10);
+  for (let i = 0; i < hitsMap.length; i++) {
+    let row = new Array(10);
+    row.fill(true);
+    hitsMap[i] = row;
+  }
+  hitsMap[6][4] = false;
+  const testPlayer = tF.Player();
+  expect(testPlayer.attack(hitsMap)).toEqual([6, 4]);
 });
