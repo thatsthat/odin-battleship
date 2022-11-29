@@ -1,4 +1,5 @@
 {
   "cSpell.enabled": true,
-  "cSpell.enableFiletypes": ["!javascript", "!json"]
+  "cSpell.enableFiletypes": ["!css", "!javascript", "!json"],
+  "liveServer.settings.root": "/playground"
 }

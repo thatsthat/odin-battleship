@@ -3,3 +3,8 @@
 * {
   font-family: "Roboto";
 }
+body {
+  color: white;
+  font-size: 2rem;
+  background-color: #202124;
+}

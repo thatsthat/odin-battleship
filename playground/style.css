@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+#a3 {
+  color: green;
+}
+
+#player1,
+#player2 {
+  margin: 1rem;
+  width: 50vw;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+#player1 div,
+#player2 div {
+  outline: solid blue 1px;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+}
