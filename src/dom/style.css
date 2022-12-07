@@ -3,8 +3,34 @@
 * {
   font-family: "Roboto";
 }
-body {
-  color: white;
-  font-size: 2rem;
-  background-color: #202124;
+
+#a3 {
+  color: black;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+}
+
+#boards {
+  margin-top: 15vh;
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+}
+
+#player1,
+#player2 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+#player1 div,
+#player2 div {
+  outline: solid 1px;
+  display: flex;
+  justify-content: center;
+  padding: 1.5vh 1.5vw;
 }
