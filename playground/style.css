@@ -1,18 +1,21 @@
-body {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  align-items: center;
+#a3 {
+  color: black;
 }
 
-#a3 {
-  color: green;
+#content {
+  display: flex;
+  justify-content: center;
+}
+
+#boards {
+  margin-top: 15vh;
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
 }
 
 #player1,
 #player2 {
-  margin: 1rem;
-  width: 50vw;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
@@ -20,8 +23,16 @@ body {
 
 #player1 div,
 #player2 div {
-  outline: solid blue 1px;
+  outline: solid 1px;
   display: flex;
-  height: 20px;
   justify-content: center;
+  padding: 1.5vh 1.5vw;
 }
+
+/* #player1 div::before,
+#player2 div::before {
+  content: "";
+  padding-bottom: 100%;
+  display: block;
+}
+ */
