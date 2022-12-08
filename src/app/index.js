@@ -100,7 +100,7 @@ const Gameboard = () => {
 };
 
 // Player factory function
-const Player = () => {
+const Player = (name = null) => {
   // Players can attack other players board
   // Players know which moves have already been made to avoid repeating
   const board = new Gameboard();
@@ -111,6 +111,7 @@ const Player = () => {
         row.forEach((pos, indCol) => {
           if (attackCoords == null) {
             if (pos == false) {
+              // Attack the first unattacked position
               attackCoords = [indRow, indCol];
             }
           }
@@ -119,7 +120,19 @@ const Player = () => {
     });
     return attackCoords;
   };
-  return { board, attack };
+  return { board, attack, name };
 };
 
-export { Ship, Gameboard, Player };
+// Module that controls the game flow
+const gameLoop = (() => {
+  // Initialize player 1 and 2
+  const p1 = tF.Player("Player 1");
+  const p2 = tf.Player("Player 2");
+  // hardcode some ships on p1 and p2 boards
+  p1.board.placeShip(1, [0, 0], "v");
+  p2.board.placeShip(3, [1, 1], "h");
+
+  let activePlayer = p1;
+})();
+
+export { Ship, Gameboard, Player, gameLoop };

@@ -2,35 +2,40 @@ import "./style.css";
 //import "@mdi/font/css/materialdesignicons.css";
 import { taskList } from "../app/index.js";
 
-const plainHTML = `
-  <div id="content">
-    <div id="boards">
-      <div id="player1"></div>
-      <div id="player2"></div>
-    </div>
-  </div>
-  <script src="index.js"></script>`;
+// Create module domInter to interact with the DOM and create UI
+const domInter = (() => {
+  const renderUI = () => {
+    const plainHTML = `
+      <div id="content">
+        <div id="boards">
+          <div id="player1"></div>
+          <div id="player2"></div>
+        </div>
+      </div>`;
+    document.body.innerHTML = plainHTML;
+    const gridP1 = document.getElementById("player1");
+    const gridP2 = document.getElementById("player2");
+    for (let i = 0; i < 100; i++) {
+      let cell = document.createElement("div");
+      cell.id = `a${i}`;
+      cell.textContent = "0";
+      // Add click listener to register attacks
+      cell.addEventListener("click", () => {
+        const a = 1;
+      });
+      gridP1.appendChild(cell);
+    }
+    for (let i = 0; i < 100; i++) {
+      let cell = document.createElement("div");
+      cell.id = `b${i}`;
+      cell.textContent = "1";
+      gridP2.appendChild(cell);
+    }
+  };
 
-function renderUI() {
-  document.body.innerHTML = plainHTML;
+  return {
+    renderUI,
+  };
+})();
 
-  const gridP1 = document.getElementById("player1");
-
-  for (let i = 0; i < 100; i++) {
-    let cell = document.createElement("div");
-    cell.id = `a${i}`;
-    cell.textContent = "0";
-    gridP1.appendChild(cell);
-  }
-
-  const gridP2 = document.getElementById("player2");
-
-  for (let i = 0; i < 100; i++) {
-    let cell = document.createElement("div");
-    cell.id = `b${i}`;
-    cell.textContent = "1";
-    gridP2.appendChild(cell);
-  }
-}
-
-export { renderUI };
+export { domInter };
