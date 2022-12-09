@@ -45,7 +45,7 @@ const Gameboard = () => {
       if (endCoords.some(outsideBoard)) {
         throw "The ship must be place within the board limits";
       } else {
-        ships.push(new Ship(shipSizes[shipType - 1]));
+        ships.push(Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
           map_ships[startCoords[1]][startCoords[0] + i] = ships.length;
         }
@@ -56,7 +56,7 @@ const Gameboard = () => {
       if (endCoords.some(outsideBoard)) {
         throw "The ship must be placed within the board limits";
       } else {
-        ships.push(new Ship(shipSizes[shipType - 1]));
+        ships.push(Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
           map_ships[startCoords[1] + i][startCoords[0]] = ships.length;
         }
@@ -103,7 +103,7 @@ const Gameboard = () => {
 const Player = (name = null) => {
   // Players can attack other players board
   // Players know which moves have already been made to avoid repeating
-  const board = new Gameboard();
+  const board = Gameboard();
   const attack = (opHitsMap) => {
     let attackCoords = null;
     opHitsMap.forEach((row, indRow) => {
@@ -126,8 +126,8 @@ const Player = (name = null) => {
 // Module that controls the game flow
 const gameLoop = (() => {
   // Initialize player 1 and 2
-  const p1 = tF.Player("Player 1");
-  const p2 = tf.Player("Player 2");
+  const p1 = Player("Player 1");
+  const p2 = Player("Player 2");
   // hardcode some ships on p1 and p2 boards
   p1.board.placeShip(1, [0, 0], "v");
   p2.board.placeShip(3, [1, 1], "h");

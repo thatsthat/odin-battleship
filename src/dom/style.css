@@ -36,4 +36,11 @@
   justify-content: center;
   padding: 1.5vh 1.5vw;
   background-color: darkblue;
+  cursor: pointer;
+}
+
+#player1 div:hover,
+#player2 div:hover {
+  transform: scale(1.2);
+  background-color: violet;
 }
