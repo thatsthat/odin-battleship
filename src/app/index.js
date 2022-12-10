@@ -73,15 +73,25 @@ const Gameboard = () => {
   };
 
   const receiveAttack = (attackCoords) => {
+    // Handle the case of cell ID instead of cell coordinates
+    const nonDigit = /\D/;
+    let aCoords = "";
+    if (nonDigit.test(attackCoords[0])) {
+      const cellNum = attackCoords.match(/\d/g).join("");
+      aCoords = [(cellNum - (cellNum % 10)) / 10, cellNum % 10];
+      console.log(aCoords);
+    } else {
+      aCoords = attackCoords;
+    }
     const outsideBoard = (v) => v < 0 || v >= 10;
-    if (attackCoords.some(outsideBoard)) {
+    if (aCoords.some(outsideBoard)) {
       throw "Invalid attack coordinates";
     }
-    if (map_hits[attackCoords[1]][attackCoords[0]] === true) {
+    if (map_hits[aCoords[1]][aCoords[0]] === true) {
       throw "You can't attack the same coordinates twice";
     }
-    map_hits[attackCoords[1]][attackCoords[0]] = true;
-    const attackVal = map_ships[attackCoords[1]][attackCoords[0]];
+    map_hits[aCoords[1]][aCoords[0]] = true;
+    const attackVal = map_ships[aCoords[1]][aCoords[0]];
     if (typeof attackVal == "undefined") return "The attack missed all ships!";
     else {
       const hitShip = ships[attackVal - 1];

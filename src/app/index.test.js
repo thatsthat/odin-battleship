@@ -42,6 +42,7 @@ test("Hit a ship!", () => {
   const testBoard4 = tF.Gameboard();
   testBoard4.placeShip(1, [0, 0], "v");
   expect(testBoard4.receiveAttack([0, 0])).toBe("The attack has hit a ship!");
+  expect(testBoard4.receiveAttack("a4")).toBe("The attack has hit a ship!");
 });
 
 test("Miss a ship", () => {

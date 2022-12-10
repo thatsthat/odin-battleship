@@ -18,17 +18,17 @@ const domInter = (() => {
     for (let i = 0; i < 100; i++) {
       let cell = document.createElement("div");
       cell.id = `a${i}`;
-      cell.textContent = "0";
+      cell.textContent = cell.id;
       // Add click listener to register attacks
-      cell.addEventListener("click", () => {
-        const a = 1;
+      cell.addEventListener("click", (event) => {
+        const a = event.target.id;
       });
       gridP1.appendChild(cell);
     }
     for (let i = 0; i < 100; i++) {
       let cell = document.createElement("div");
       cell.id = `b${i}`;
-      cell.textContent = "1";
+      cell.textContent = cell.id;
       gridP2.appendChild(cell);
     }
   };
