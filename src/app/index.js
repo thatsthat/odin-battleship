@@ -74,6 +74,10 @@ const Gameboard = () => {
 
   const receiveAttack = (attackCoords) => {
     // Handle the case of cell ID instead of cell coordinates
+    // Return codes:
+    // 0: "The attack missed all ships!"
+    // 1: "The attack has hit a ship!"
+    // 2: "The attack has hit and sunk a ship!"
     const nonDigit = /\D/;
     let aCoords = "";
     if (nonDigit.test(attackCoords[0])) {
@@ -92,12 +96,12 @@ const Gameboard = () => {
     }
     map_hits[aCoords[1]][aCoords[0]] = true;
     const attackVal = map_ships[aCoords[1]][aCoords[0]];
-    if (typeof attackVal == "undefined") return "The attack missed all ships!";
+    if (typeof attackVal == "undefined") return 0;
     else {
       const hitShip = ships[attackVal - 1];
       hitShip.hit();
-      if (hitShip.isSunk()) return "The attack has hit and sunk a ship!";
-      else return "The attack has hit a ship!";
+      if (hitShip.isSunk()) return 2;
+      else return 1;
     }
   };
 
@@ -136,13 +140,14 @@ const Player = (name = null) => {
 // Module that controls the game flow
 const gameLoop = (() => {
   // Initialize player 1 and 2
-  const p1 = Player("Player 1");
-  const p2 = Player("Player 2");
+  const player1 = Player("Player 1");
+  const player2 = Player("Player 2");
   // hardcode some ships on p1 and p2 boards
-  p1.board.placeShip(1, [0, 0], "v");
-  p2.board.placeShip(3, [1, 1], "h");
+  player1.board.placeShip(1, [0, 0], "v");
+  player2.board.placeShip(3, [1, 1], "h");
+  let activePlayer = player1;
 
-  let activePlayer = p1;
+  return { player1, player2, activePlayer };
 })();
 
 export { Ship, Gameboard, Player, gameLoop };

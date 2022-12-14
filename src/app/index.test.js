@@ -41,14 +41,14 @@ test("Place a Carrier ship with wrong coordinates", () => {
 test("Hit a ship!", () => {
   const testBoard4 = tF.Gameboard();
   testBoard4.placeShip(1, [0, 0], "v");
-  expect(testBoard4.receiveAttack([0, 0])).toBe("The attack has hit a ship!");
-  expect(testBoard4.receiveAttack("a4")).toBe("The attack has hit a ship!");
+  expect(testBoard4.receiveAttack([0, 0])).toEqual(1);
+  expect(testBoard4.receiveAttack("a4")).toEqual(1);
 });
 
 test("Miss a ship", () => {
   const testBoard5 = tF.Gameboard();
   testBoard5.placeShip(1, [0, 0], "v");
-  expect(testBoard5.receiveAttack([1, 0])).toBe("The attack missed all ships!");
+  expect(testBoard5.receiveAttack([1, 0])).toEqual(0);
 });
 
 test("Sink a ship!", () => {
@@ -58,9 +58,7 @@ test("Sink a ship!", () => {
     testBoard6.receiveAttack([0, i]);
   }
   expect(testBoard6.allSunk()).toEqual(false);
-  expect(testBoard6.receiveAttack([0, 4])).toBe(
-    "The attack has hit and sunk a ship!"
-  );
+  expect(testBoard6.receiveAttack([0, 4])).toEqual(2);
   expect(testBoard6.allSunk()).toEqual(true);
 });
 
