@@ -1,3 +1,5 @@
+import { domInter } from "../dom/index.js";
+
 // Ship factory function
 const Ship = (shipLength) => {
   let numHits = 0;
@@ -139,6 +141,8 @@ const Player = (name = null) => {
 
 // Module that controls the game flow
 const gameLoop = (() => {
+  // Initialize DOM
+  domInter.renderUI();
   // Initialize player 1 and 2
   const player1 = Player("Player 1");
   const player2 = Player("Player 2");

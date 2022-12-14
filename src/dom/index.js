@@ -8,14 +8,14 @@ const domInter = (() => {
     const plainHTML = `
       <div id="content">
         <div id="boards">
-          <div id="player1"></div>
-          <div id="player2"></div>
+          <div id="player1" class="player"></div>
+          <div id="player2" class="player, hidden"></div>
         </div>
       </div>`;
     document.body.innerHTML = plainHTML;
     const gridP1 = document.getElementById("player1");
     const gridP2 = document.getElementById("player2");
-    const evListen = (event) => {
+    const evListen = () => {
       const cellID = event.target.id;
       const player = event.target.parentNode.id;
       let res = "";
@@ -51,7 +51,7 @@ const domInter = (() => {
       gridP2.appendChild(cell);
     }
   };
-
+  // Player 1 is active at start
   return {
     renderUI,
   };
