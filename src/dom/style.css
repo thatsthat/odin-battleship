@@ -4,10 +4,11 @@
   font-family: "Roboto";
   background-color: #2d2e2f;
   color: grey;
+  /* outline: 2px solid red; */
 }
 
 #a3 {
-  color: grey;
+  /* color: grey; */
 }
 
 #content {
@@ -15,8 +16,19 @@
   justify-content: center;
 }
 
+.zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  padding: 4vh 1vw;
+  font-size: 4rem;
+}
+
 #boards {
-  margin-top: 15vh;
+  margin-top: 5vh;
   display: flex;
   width: 100vw;
   justify-content: space-around;
@@ -29,18 +41,24 @@
 }
 
 .player div {
-  outline: solid 1px;
+  outline: solid grey 1px;
   display: flex;
   justify-content: center;
-  padding: 1.5vh 1.5vw;
+  padding: 1.5vh 1.2vw;
   background-color: darkblue;
+  color: darkblue;
+  cursor: pointer;
+  user-select: none;
+}
+
+#player2 div {
   cursor: pointer;
 }
 
-#player1 div:hover,
 #player2 div:hover {
   transform: scale(1.2);
   background-color: violet;
+  color: violet;
 }
 
 .hidden {

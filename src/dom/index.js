@@ -8,8 +8,14 @@ const domInter = (() => {
     const plainHTML = `
       <div id="content">
         <div id="boards">
-          <div id="player1" class="player"></div>
-          <div id="player2" class="player, hidden"></div>
+          <div class="zone">
+            <div class="title">Player 1</div>
+            <div id="player1" class="player"></div>
+          </div>
+          <div class="zone">
+            <div class="title">Computer</div>  
+            <div id="player2" class="player"></div>
+          </div>
         </div>
       </div>`;
     document.body.innerHTML = plainHTML;
@@ -17,14 +23,8 @@ const domInter = (() => {
     const gridP2 = document.getElementById("player2");
     const evListen = () => {
       const cellID = event.target.id;
-      const player = event.target.parentNode.id;
-      let res = "";
-      // Call the receiveAttack method of corresponding player
-      if (player == "player1") {
-        res = gameLoop.player1.board.receiveAttack(cellID);
-      } else if (player == "player2") {
-        res = gameLoop.player2.board.receiveAttack(cellID);
-      }
+      const res = gameLoop.player2.board.receiveAttack(cellID);
+
       // Change cell color depending on attack result
       if (res == 0) {
         event.target.style.backgroundColor = "grey";
@@ -33,13 +33,25 @@ const domInter = (() => {
       } else if (res == 2) {
         event.target.style.backgroundColor = "red";
       }
+      event.target.style.color = event.target.style.backgroundColor;
+      // Wait 1 second and make computer attack player 1
+      const wait1Sec = new Promise((r) => setTimeout(r, 1000));
+      wait1Sec.then(() => {
+        // Generate automatic attack coords
+        const attackCoords = gameLoop.player2.attack(
+          gameLoop.player1.board.getHitsMap()
+        );
+        //console.log(attackCoords);
+        // Attack player1 using the coords
+        const res2 = gameLoop.player1.board.receiveAttack(attackCoords);
+        console.log(res2);
+        // Change player 1 cell collor depending on attack results
+      });
     };
     for (let i = 0; i < 100; i++) {
       let cell = document.createElement("div");
       cell.id = `a${i}`;
       cell.textContent = cell.id;
-      // Add click listener to register attacks
-      cell.addEventListener("click", evListen);
       gridP1.appendChild(cell);
     }
     for (let i = 0; i < 100; i++) {
