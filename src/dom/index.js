@@ -39,13 +39,25 @@ const domInter = (() => {
       wait1Sec.then(() => {
         // Generate automatic attack coords
         const attackCoords = gameLoop.player2.attack(
-          gameLoop.player1.board.getHitsMap()
+          gameLoop.player1.board.getShootsMap()
         );
         //console.log(attackCoords);
         // Attack player1 using the coords
         const res2 = gameLoop.player1.board.receiveAttack(attackCoords);
+        //console.log(res2);
+        // Change player 1 cell color depending on attack results,
+        // change from coordinates to node id
+        const cellInt = 10 * attackCoords[0] + attackCoords[1];
+        const cell2ID = `a${cellInt}`;
+        const attackedCell = document.getElementById(cell2ID);
         console.log(res2);
-        // Change player 1 cell collor depending on attack results
+        if (res2 == 0) {
+          attackedCell.style.backgroundColor = "grey";
+        } else if (res == 1) {
+          attackedCell.style.backgroundColor = "red";
+        } else if (res == 2) {
+          attackedCell.style.backgroundColor = "red";
+        }
       });
     };
     for (let i = 0; i < 100; i++) {

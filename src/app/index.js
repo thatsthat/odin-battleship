@@ -22,12 +22,12 @@ const Gameboard = () => {
   const shipSizes = [5, 4, 3, 3, 2];
   // Create a 10 x 10 board
   let map_ships = new Array(10);
-  let map_hits = new Array(10);
+  let map_shoots = new Array(10);
   for (let i = 0; i < map_ships.length; i++) {
     map_ships[i] = new Array(10);
     const falses = new Array(10);
     falses.fill(false);
-    map_hits[i] = falses;
+    map_shoots[i] = falses;
   }
   // Create an array to store all ships objects on the board
   const ships = [];
@@ -70,8 +70,8 @@ const Gameboard = () => {
     return map_ships;
   };
 
-  const getHitsMap = () => {
-    return map_hits;
+  const getShootsMap = () => {
+    return map_shoots;
   };
 
   const receiveAttack = (attackCoords) => {
@@ -92,11 +92,11 @@ const Gameboard = () => {
     if (aCoords.some(outsideBoard)) {
       throw "Invalid attack coordinates";
     }
-    if (map_hits[aCoords[0]][aCoords[1]] === true) {
+    if (map_shoots[aCoords[0]][aCoords[1]] === true) {
       throw "You can't attack the same coordinates twice";
     }
-    map_hits[aCoords[0]][aCoords[1]] = true;
-    const attackVal = map_ships[aCoords[1]][aCoords[0]];
+    map_shoots[aCoords[0]][aCoords[1]] = true;
+    const attackVal = map_ships[aCoords[0]][aCoords[1]];
     if (typeof attackVal == "undefined") return 0;
     else {
       const hitShip = ships[attackVal - 1];
@@ -111,7 +111,7 @@ const Gameboard = () => {
     return sunkShips.every(Boolean);
   };
 
-  return { getShipsMap, getHitsMap, placeShip, receiveAttack, allSunk };
+  return { getShipsMap, getShootsMap, placeShip, receiveAttack, allSunk };
 };
 
 // Player factory function
@@ -119,9 +119,9 @@ const Player = (name = null) => {
   // Players can attack other players board
   // Players know which moves have already been made to avoid repeating
   const board = Gameboard();
-  const attack = (opHitsMap) => {
+  const attack = (opShootsMap) => {
     let attackCoords = null;
-    opHitsMap.forEach((row, indRow) => {
+    opShootsMap.forEach((row, indRow) => {
       if (attackCoords == null) {
         row.forEach((pos, indCol) => {
           if (attackCoords == null) {
@@ -148,6 +148,8 @@ const gameLoop = (() => {
   // hardcode some ships on p1 and p2 boards
   player1.board.placeShip(1, [0, 0], "v");
   player2.board.placeShip(3, [1, 1], "h");
+  console.log(player1.board.getShipsMap());
+  console.log(player2.board.getShipsMap());
   let activePlayer = player1;
 
   return { player1, player2, activePlayer };
