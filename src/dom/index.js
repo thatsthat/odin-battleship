@@ -50,13 +50,16 @@ const domInter = (() => {
         const cellInt = 10 * attackCoords[0] + attackCoords[1];
         const cell2ID = `a${cellInt}`;
         const attackedCell = document.getElementById(cell2ID);
-        console.log(res2);
+        console.log(attackedCell);
         if (res2 == 0) {
           attackedCell.style.backgroundColor = "grey";
-        } else if (res == 1) {
+          attackedCell.style.color = "grey";
+        } else if (res2 == 1) {
           attackedCell.style.backgroundColor = "red";
-        } else if (res == 2) {
+          attackedCell.style.color = "red";
+        } else if (res2 == 2) {
           attackedCell.style.backgroundColor = "red";
+          attackedCell.style.color = "red";
         }
       });
     };

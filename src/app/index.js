@@ -148,8 +148,6 @@ const gameLoop = (() => {
   // hardcode some ships on p1 and p2 boards
   player1.board.placeShip(1, [0, 0], "v");
   player2.board.placeShip(3, [1, 1], "h");
-  console.log(player1.board.getShipsMap());
-  console.log(player2.board.getShipsMap());
   let activePlayer = player1;
 
   return { player1, player2, activePlayer };
