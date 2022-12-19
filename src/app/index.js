@@ -49,7 +49,7 @@ const Gameboard = () => {
       } else {
         ships.push(Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
-          map_ships[startCoords[1]][startCoords[0] + i] = ships.length;
+          map_ships[startCoords[0]][startCoords[1] + i] = ships.length;
         }
       }
     } else if (orientation == "v") {
@@ -60,7 +60,7 @@ const Gameboard = () => {
       } else {
         ships.push(Ship(shipSizes[shipType - 1]));
         for (let i = 0; i < shipSize; i++) {
-          map_ships[startCoords[1] + i][startCoords[0]] = ships.length;
+          map_ships[startCoords[0] + i][startCoords[1]] = ships.length;
         }
       }
     }
@@ -146,10 +146,13 @@ const gameLoop = (() => {
   const player1 = Player("Player 1");
   const player2 = Player("Player 2");
   // hardcode some ships on p1 and p2 boards
-  player1.board.placeShip(1, [0, 0], "v");
-  player2.board.placeShip(3, [1, 1], "h");
+  player1.board.placeShip(1, [0, 0], "h");
+  console.log(player1.board.getShipsMap());
+  player1.board.placeShip(1, [1, 3], "h");
+  console.log(player1.board.getShipsMap());
+  player2.board.placeShip(1, [1, 1], "v");
+  //player2.board.placeShip(1, [0, 7], "v");
   let activePlayer = player1;
-
   return { player1, player2, activePlayer };
 })();
 
