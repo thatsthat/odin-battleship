@@ -23,7 +23,10 @@ const domInter = (() => {
     const gridP2 = document.getElementById("player2");
     const evListen = () => {
       const cellID = event.target.id;
-      const res = gameLoop.player2.board.receiveAttack(cellID);
+      const res = gameLoop.player2.board.receiveAttack(
+        cellID,
+        gameLoop.player2.name
+      );
 
       // Change cell color depending on attack result
       if (res == 0) {
@@ -41,16 +44,16 @@ const domInter = (() => {
         const attackCoords = gameLoop.player2.attack(
           gameLoop.player1.board.getShootsMap()
         );
-        //console.log(attackCoords);
         // Attack player1 using the coords
-        const res2 = gameLoop.player1.board.receiveAttack(attackCoords);
-        //console.log(res2);
+        const res2 = gameLoop.player1.board.receiveAttack(
+          attackCoords,
+          gameLoop.player1.name
+        );
         // Change player 1 cell color depending on attack results,
         // change from coordinates to node id
         const cellInt = 10 * attackCoords[0] + attackCoords[1];
         const cell2ID = `a${cellInt}`;
         const attackedCell = document.getElementById(cell2ID);
-        console.log(attackedCell);
         if (res2 == 0) {
           attackedCell.style.backgroundColor = "grey";
           attackedCell.style.color = "grey";
@@ -78,9 +81,26 @@ const domInter = (() => {
       gridP2.appendChild(cell);
     }
   };
+  const colorSunkShip = (coordsSet, playerName) => {
+    coordsSet.forEach((coords) => {
+      // change from coordinates to node id
+      const cellInt = 10 * coords[0] + coords[1];
+      let cell2ID = "";
+      if (playerName == "Player 1") {
+        cell2ID = `a${cellInt}`;
+      }
+      if (playerName == "Player 2") {
+        cell2ID = `b${cellInt}`;
+      }
+      const cell = document.getElementById(cell2ID);
+      cell.style.backgroundColor = "purple";
+      cell.style.color = "purple";
+    });
+  };
   // Player 1 is active at start
   return {
     renderUI,
+    colorSunkShip,
   };
 })();
 

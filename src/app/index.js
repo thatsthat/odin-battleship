@@ -74,7 +74,7 @@ const Gameboard = () => {
     return map_shoots;
   };
 
-  const receiveAttack = (attackCoords) => {
+  const receiveAttack = (attackCoords, playerName) => {
     // Handle the case of cell ID instead of cell coordinates
     // Return codes:
     // 0: "The attack missed all ships!"
@@ -96,13 +96,21 @@ const Gameboard = () => {
       throw "You can't attack the same coordinates twice";
     }
     map_shoots[aCoords[0]][aCoords[1]] = true;
-    const attackVal = map_ships[aCoords[0]][aCoords[1]];
-    if (typeof attackVal == "undefined") return 0;
+    const attackedShipID = map_ships[aCoords[0]][aCoords[1]];
+    if (typeof attackedShipID == "undefined") return 0;
     else {
-      const hitShip = ships[attackVal - 1];
+      const hitShip = ships[attackedShipID - 1];
       hitShip.hit();
-      if (hitShip.isSunk()) return 2;
-      else return 1;
+      if (hitShip.isSunk()) {
+        // Generate the coordinates of the sunk ship to change its color
+        let sunkShipCoords = [];
+        for (let i = 0; i < map_ships.length; i++) {
+          for (let j = 0; j < map_ships[0].length; j++)
+            if (map_ships[i][j] == attackedShipID) sunkShipCoords.push([i, j]);
+        }
+        domInter.colorSunkShip(sunkShipCoords, playerName);
+        return 2;
+      } else return 1;
     }
   };
 
@@ -147,9 +155,7 @@ const gameLoop = (() => {
   const player2 = Player("Player 2");
   // hardcode some ships on p1 and p2 boards
   player1.board.placeShip(1, [0, 0], "h");
-  console.log(player1.board.getShipsMap());
   player1.board.placeShip(1, [1, 3], "h");
-  console.log(player1.board.getShipsMap());
   player2.board.placeShip(1, [1, 1], "v");
   //player2.board.placeShip(1, [0, 7], "v");
   let activePlayer = player1;
