@@ -27,7 +27,6 @@ const domInter = (() => {
         cellID,
         gameLoop.player2.name
       );
-
       // Change cell color depending on attack result
       if (res == 0) {
         event.target.style.backgroundColor = "grey";
@@ -35,6 +34,10 @@ const domInter = (() => {
         event.target.style.backgroundColor = "red";
       } else if (res == 2) {
         event.target.style.backgroundColor = "purple";
+        // Check if this was last floating ship
+        if (gameLoop.player2.board.allSunk()) {
+          // Announce Player 1 as winner
+        }
       }
       event.target.style.color = event.target.style.backgroundColor;
       // Wait 1 second and make computer attack player 1
@@ -63,6 +66,10 @@ const domInter = (() => {
         } else if (res2 == 2) {
           attackedCell.style.backgroundColor = "purple";
           attackedCell.style.color = "purple";
+          // Check if this was last floating ship
+          if (gameLoop.player1.board.allSunk()) {
+            // Announce Player 2 as winner
+          }
         }
       });
     };

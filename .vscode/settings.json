@@ -1,5 +1,5 @@
 {
   "cSpell.enabled": true,
   "cSpell.enableFiletypes": ["!css", "!javascript", "!json"],
-  "liveServer.settings.root": "/playground"
+  "liveServer.settings.root": "/dist"
 }
