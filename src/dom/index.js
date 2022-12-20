@@ -34,7 +34,7 @@ const domInter = (() => {
       } else if (res == 1) {
         event.target.style.backgroundColor = "red";
       } else if (res == 2) {
-        event.target.style.backgroundColor = "red";
+        event.target.style.backgroundColor = "purple";
       }
       event.target.style.color = event.target.style.backgroundColor;
       // Wait 1 second and make computer attack player 1
@@ -61,8 +61,8 @@ const domInter = (() => {
           attackedCell.style.backgroundColor = "red";
           attackedCell.style.color = "red";
         } else if (res2 == 2) {
-          attackedCell.style.backgroundColor = "red";
-          attackedCell.style.color = "red";
+          attackedCell.style.backgroundColor = "purple";
+          attackedCell.style.color = "purple";
         }
       });
     };
