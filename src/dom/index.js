@@ -4,6 +4,18 @@ import { gameLoop } from "../app/index.js";
 
 // Create module domInter to interact with the DOM and create UI
 const domInter = (() => {
+  const announceWinner = (playerName) => {
+    // Show the modal
+    let modal = document.getElementById("myModal");
+    let modalText = document.querySelector(".modal-content > p");
+    modalText.textContent = `The winner is ${playerName}`;
+    modal.style.display = "block";
+    // Click anywhere to start a new game
+    document.body.addEventListener("click", () => {
+      modal.style.display = "none";
+      location.reload();
+    });
+  };
   const renderUI = () => {
     const plainHTML = `
       <div id="content">
@@ -17,7 +29,14 @@ const domInter = (() => {
             <div id="player2" class="player"></div>
           </div>
         </div>
+      </div>
+      <div id="myModal" class="modal">
+      <!-- Modal content -->
+        <div class="modal-content">
+          <p></p>
+        </div>
       </div>`;
+
     document.body.innerHTML = plainHTML;
     const gridP1 = document.getElementById("player1");
     const gridP2 = document.getElementById("player2");
@@ -36,7 +55,7 @@ const domInter = (() => {
         event.target.style.backgroundColor = "purple";
         // Check if this was last floating ship
         if (gameLoop.player2.board.allSunk()) {
-          // Announce Player 1 as winner
+          announceWinner(gameLoop.player2.name);
         }
       }
       event.target.style.color = event.target.style.backgroundColor;
@@ -68,7 +87,7 @@ const domInter = (() => {
           attackedCell.style.color = "purple";
           // Check if this was last floating ship
           if (gameLoop.player1.board.allSunk()) {
-            // Announce Player 2 as winner
+            announceWinner(gameLoop.player1.name);
           }
         }
       });
