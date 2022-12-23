@@ -57,7 +57,7 @@ const domInter = (() => {
         event.target.style.backgroundColor = "purple";
         // Check if this was last floating ship
         if (gameLoop.player2.board.allSunk()) {
-          announceWinner(gameLoop.player2.name);
+          announceWinner(gameLoop.player1.name);
         }
       }
       event.target.style.color = event.target.style.backgroundColor;
@@ -89,7 +89,7 @@ const domInter = (() => {
           attackedCell.style.color = "purple";
           // Check if this was last floating ship
           if (gameLoop.player1.board.allSunk()) {
-            announceWinner(gameLoop.player1.name);
+            announceWinner(gameLoop.player2.name);
           }
         }
       });
