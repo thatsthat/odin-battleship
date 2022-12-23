@@ -8,11 +8,11 @@ const domInter = (() => {
     // Show the modal
     let modal = document.getElementById("myModal");
     let modalText = document.querySelector(".modal-content > p");
-    modalText.textContent = `The winner is ${playerName}`;
+    modalText.textContent = `${playerName} is the winner!`;
     modal.style.display = "block";
     // Click anywhere to start a new game
-    document.body.addEventListener("click", () => {
-      modal.style.display = "none";
+    const button = document.getElementById("buttonNewGame");
+    button.addEventListener("click", () => {
       location.reload();
     });
   };
@@ -34,9 +34,11 @@ const domInter = (() => {
       <!-- Modal content -->
         <div class="modal-content">
           <p></p>
+          <div id="newGame">
+            <button id="buttonNewGame">New Game</button>
+          </div>
         </div>
       </div>`;
-
     document.body.innerHTML = plainHTML;
     const gridP1 = document.getElementById("player1");
     const gridP2 = document.getElementById("player2");
